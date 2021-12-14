@@ -48,7 +48,7 @@ fi
 
 if [[ $2 == 3 ]];then
   rm Cardlog.txt
-  echo "开始检查显卡"
+  echo "开始检查显卡，第一列显存，第二列GPU使用"
   for i in `cat NodeList.txt`;do
     echo ssh $i
     ssh $i /public/software/apps/DeepLearning/PyTorch/torch1.7.0a0-rocm4.0.1-build/bin/python3 zjx_Node.py --function 3
