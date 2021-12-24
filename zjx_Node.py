@@ -57,6 +57,8 @@ def Normalized_NodeList():
         str_split = str1.split(',')
         list_len = len(str_split)
         line=1
+        #print(str_split)
+        str_split[-1]=str_split[-1][:-1]
         for i in str_split:
             if line == list_len: i=i[:-2]
             if len(i) ==  8: LastList.append(i)
@@ -75,11 +77,12 @@ def Normalized_NodeList():
                 else:
                     NodeList.append(i)
             line=line+1
-
+    #print(NodeList)  
     for i in range(len(NodeList)):
         if len(NodeList[i])==6: head=NodeList[i]
         else:
             if len(NodeList[i])==2: LastList.append(head+NodeList[i])
+            #elif len(NodeList[i])==8: LastList.append(NodeList[i])
             else:
                 index = NodeList[i].split('-')
                 start = index[0]

@@ -11,12 +11,12 @@
 #####3、检查节点Card#########################
 ####./CheckNode.sh 14326937 3################    检查节点显卡使用情况
 
-module rm compiler/rocm/2.9
-module load compiler/rocm/4.0.1
-module load apps/PyTorch/1.8.0a0/pytroch_1.8-rocm_4.0.1
+#module rm compiler/rocm/2.9
+#module load compiler/rocm/4.0.1
+#module load apps/PyTorch/1.8.0a0/pytroch_1.8-rocm_4.0.1
 
 sacct -j $1 --format=NodeList -p | grep -v NodeList | cut -d "|" -f 1 | sed -n '1p' > NodeList.txt
-/public/software/apps/DeepLearning/PyTorch/torch1.7.0a0-rocm4.0.1-build/bin/python3 zjx_Node.py --function 1
+/public/software/apps/DeepLearning/PyTorch/torch1.7.0a0-rocm4.0.1-build/bin/python3 /public/home/zhujingxu/zjx_Node.py --function 1
 
 if [[ $2 == 1 ]];then
   echo "寻找 $3 这一段时间的报错"
@@ -48,10 +48,10 @@ fi
 
 if [[ $2 == 3 ]];then
   rm Cardlog.txt
-  echo "开始检查显卡，第一列显存，第二列GPU使用"
+  echo "开始检查显卡"
   for i in `cat NodeList.txt`;do
     echo ssh $i
-    ssh $i /public/software/apps/DeepLearning/PyTorch/torch1.7.0a0-rocm4.0.1-build/bin/python3 zjx_Node.py --function 3
+    ssh $i /public/software/apps/DeepLearning/PyTorch/torch1.7.0a0-rocm4.0.1-build/bin/python3 /public/home/zhujingxu/zjx_Node.py --function 3
   done >> Cardlog.txt
   echo "所有卡的使用情况保存在Cardlog.txt中"
 fi
